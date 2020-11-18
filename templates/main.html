@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<style>
+</style>
+
+
+<script  type="text/javascript">
+function setup_page(){ return; }
+</script>
+
+
+<head>
+<title>Alexandre DeZotti Portfolio</title>
+</head>
+<body onload="setup_page()">
+
+<h1>Alexandre De Zotti</h1>
+
+{% include 'includes/contact-details.html' %}
+
+<div class="vert-space">
+</div>
+
+<div id="portfolio">
+<table style="width:90%" class="portfolio-table">
+<tr class="table-header">
+{% for col in portfolio_columns %}
+{% if col != 'Tags' %}
+<th>
+{{col}}
+</th>
+{% endif %}
+{% endfor %}
+</tr>
+{% for item in portfolio %}
+<tr class="{{item['tag_classes']}}">
+{% for k, v in item.items() %}
+{% if(k not in [ 'tags', 'tag_classes' ]) %}
+<td>
+{{v}}
+</td>
+{% endif %}
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
