@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
 
-<script>
-function setup_page(){ return; }
-</script>
 
 
 <style>
@@ -18,18 +15,20 @@ function setup_page(){ return; }
   margin-right: auto;
 }
 
+.center{
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .portfolio-table {
   border-collapse: collapse;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 90%;image
 }
 
 .portfolio-td {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 0.3vw;
 }
 
 #contact-details {
@@ -46,8 +45,24 @@ function setup_page(){ return; }
 
 #portfolio {
   border: 1px;
-  padding: 8px;
+  padding: 0.5vw;
 }
+
+/* https://www.w3schools.com/howto/howto_js_filter_table.asp */
+#search-input {
+  background-image: url('/static/img/search-icon.png'); /* https://github.com/apancik/public-domain-icons */
+  background-size: 1vw 1vw;
+  background-position: 0.1vw 0.1vw;
+  background-repeat: no-repeat;
+  padding: 0vw 0vw 0vw 1.2vw;
+  width: 90%;
+  font-size: 1vw;
+  border: 1px solid #ddd
+  margin-bottom: 1vw;
+  display: block;
+  margin: 0 auto;
+}
+
 
 </style>
 
@@ -55,19 +70,22 @@ function setup_page(){ return; }
 
 </head>
 
-<body onload="setup_page()">
+<body>
 
 <h1 style="font-size:4vw;text-align:center">Alexandre De Zotti</h1>
 
 {% include 'includes/contact-details.html' %}
 
 <div class="vert-space">
-<p></p>
+<p style="padding: 0.3vw;"></p>
 </div>
 
+<div style="padding:0vw 2.5vw">
+<input type="text" id="search-input" onkeyup="filter_portfolio()" placeholder="Filter by key words...">
+</div>
 
 <div id="portfolio">
-<table class="portfolio-table">
+<table class="portfolio-table center" id="portfolio-table">
 <tr class="portfolio-table-header">
 {% for col in portfolio_columns %}
 {% if col != 'Tags' %}
@@ -94,6 +112,10 @@ function setup_page(){ return; }
 {{v}}
 {% endif %}
 </td>
+{% elif(k == 'tags') %}
+<td style="display:none">
+{{v}}
+</td>
 {% endif %}
 {% endfor %}
 </tr>
@@ -101,6 +123,52 @@ function setup_page(){ return; }
 </table>
 </div>
 
+
+<script>
+function set_all_visible() {
+  var tr_i;
+  var table = document.getElementById("portfolio-table");
+  var tr_list = table.getElementsByTagName("tr");
+  for(tr_i = 0; tr_i < tr_list.length; tr_i++){
+    tr_list[tr_i].style.display = "";
+  }
+}
+
+
+// https://www.w3schools.com/howto/howto_js_filter_table.asp
+function filter_portfolio() {
+  var filters, table, tr_list, td_list, tr_i, td_i, td_text_content, tr_text, has_tag, tag_i;
+  filters = document.getElementById("search-input").value.toLowerCase().split(" ").filter(function (item){return item != "";});
+  if(filters.length == 0) {
+    set_all_visible();
+    return;
+  }
+  table = document.getElementById("portfolio-table");
+  tr_list = table.getElementsByTagName("tr");
+  for(tr_i = 0; tr_i < tr_list.length; tr_i++){
+    td_list = tr_list[tr_i].getElementsByTagName("td");
+    tr_text = "";
+    for(td_i = 0; td_i < td_list.length; td_i++){
+      td_text_content = td_list[td_i].textContent || td_list[td_i].innerText;
+      tr_text += td_text_content + " ";
+    }
+    tr_text = tr_text.toLowerCase();
+    has_tag = false;
+    for(tag_i = 0; tag_i < filters.length; tag_i ++){
+      var regexp = new RegExp("\\b" + filters[tag_i] + "\\b");
+      if(regexp.test(tr_text)){
+        has_tag = true;
+        break;
+      }
+    }
+    if(has_tag){
+        tr_list[tr_i].style.display = "";
+    }else{
+        tr_list[tr_i].style.display = "none";
+    }
+  }
+}
+</script>
 
 </body>
 </html>
