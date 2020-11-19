@@ -63,7 +63,10 @@
   margin: 0 auto;
 }
 
-
+p {
+ padding: 0 7vw;
+ font-size: 1.2vw;
+}
 </style>
 
 <title>Alexandre DeZotti Portfolio</title>
@@ -74,14 +77,17 @@
 
 <h1 style="font-size:4vw;text-align:center">Alexandre De Zotti</h1>
 
+
+
 {% include 'includes/contact-details.html' %}
 
 <div class="vert-space">
 <p style="padding: 0.3vw;"></p>
 </div>
 
+
 <div style="padding:0vw 2.5vw">
-<input type="text" id="search-input" onkeyup="filter_portfolio()" placeholder="Filter by key words...">
+<input type="text" id="search-input" onkeyup="filter_portfolio();" placeholder="Filter by key words...">
 </div>
 
 <div id="portfolio">
@@ -100,7 +106,13 @@
 {% for k, v in item.items() %}
 {% if(k not in [ 'tags', 'tag_classes' ]) %}
 <td class="portfolio-td">
-{% if(k == 'project_link') %}
+{% if(k == 'name') %}
+{% if(item['project_page'] != '') %}
+<a href="{{item['project_page']}}"><i>{{v}}</i></a>
+{% else %}
+<i>{{v}}</i>
+{% endif %}
+{% elif(k == 'project_link') %}
 {% if(v != '') %}
 <a href={{v}}>code</a>
 {% endif %}
@@ -138,6 +150,10 @@ function set_all_visible() {
 // https://www.w3schools.com/howto/howto_js_filter_table.asp
 function filter_portfolio() {
   var filters, table, tr_list, td_list, tr_i, td_i, td_text_content, tr_text, has_tag, tag_i;
+  /*if(ev.key == "Escape"){
+    set_all_visible();
+    return
+  }*/
   filters = document.getElementById("search-input").value.toLowerCase().split(" ").filter(function (item){return item != "";});
   if(filters.length == 0) {
     set_all_visible();
@@ -145,7 +161,7 @@ function filter_portfolio() {
   }
   table = document.getElementById("portfolio-table");
   tr_list = table.getElementsByTagName("tr");
-  for(tr_i = 0; tr_i < tr_list.length; tr_i++){
+  for(tr_i = 1; tr_i < tr_list.length; tr_i++){
     td_list = tr_list[tr_i].getElementsByTagName("td");
     tr_text = "";
     for(td_i = 0; td_i < td_list.length; td_i++){
