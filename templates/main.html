@@ -77,10 +77,10 @@ h1 {
   font-size: 4vw;
 }
 
-
-
-p {
+.h1-sub {
+  font-size: 3vw;
 }
+
 </style>
 
 <title>Alexandre DeZotti's Portfolio</title>
@@ -90,7 +90,7 @@ p {
 <body>
 
 <h1 style="text-align:center">Alexandre De Zotti</h1>
-
+<p  class="h1-sub" style="text-align:center">Data Scientist</p>
 
 
 {% include 'includes/contact-details.html' %}
@@ -220,7 +220,7 @@ function filter_portfolio() {
 {% elif(k == 'link') %}
 <a href="{{v}}">link</a>
 {% else %}
-<i>{{v}}</i>
+{{v}}
 {% endif %}
 </td>
 {% endfor %}
