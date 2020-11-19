@@ -1,4 +1,4 @@
 name,description,link,completion
 mathvsg,"A Python module to draw mathematical diagrams into SVG files, fully tested and documented: saves time, is more controllable and accurate","https://pypi.org/project/mathsvg/","Maintained"
 Hupacman,"A wrapper of Arch Linux' Pacman package manager with easy to remember action names (saves me time)","https://github.com/alexn11/hupacman","Maintained"
-"Programs related for complex dynamics","Python and Cython programs that draw represeantations of phase locking diagrams and transcendental dynamics","https://github.com/alexn11/complex-dynamics-progs","2020-01-09"
+"Programs for complex dynamics","Python and Cython programs that draw representations of phase locking diagrams and transcendental dynamics","https://github.com/alexn11/complex-dynamics-progs","2020-01-09"
