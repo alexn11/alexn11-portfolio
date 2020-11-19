@@ -1,6 +1,7 @@
 import datetime
 import pandas
 
+from lib.paths import portfolio_data_path, other_projects_data_path
 
 columns = [
  "name",
@@ -38,18 +39,21 @@ def date_sort_key_function(r):
 
 def sort_by_date(portfolio_list):
   return sorted(portfolio_list, key = date_sort_key_function, reverse = True)
-  
-  
+
+def load_other_projects():
+  other_projects_data = pandas.read_csv(other_projects_data_path).fillna('')
+  return [ dict(row[1]) for row in other_projects_data.iterrows() ]
+
 
 def load_portfolio():
-  portfolio_data = pandas.read_csv('static/data/portfolio.csv')
+  portfolio_data = pandas.read_csv(portfolio_data_path)
   portfolio_data = portfolio_data[columns].fillna('')
   portfolio_columns = [ ' '.join([ w.capitalize() for w in c.split('_') ]) for c in portfolio_data.columns ]
   portfolio = sort_by_date([ dict(row[1]) for row in portfolio_data.iterrows() ])
   tag_list = create_tag_list(portfolio)
   for i in range(len(portfolio)):
     portfolio[i]['tag_classes'] = convert_tags_to_classes(portfolio[i]['tags'])
-  return portfolio_columns, portfolio, tag_list
+  return portfolio_columns, portfolio, tag_list, load_other_projects()
 
 
 

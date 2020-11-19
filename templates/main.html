@@ -20,12 +20,12 @@
   margin-right: auto;
 }
 
-.portfolio-table {
+.padded-nice-table {
   border-collapse: collapse;
-  width: 90%;image
+  width: 90%;
 }
 
-.portfolio-td {
+.nice-table-td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 0.3vw;
@@ -35,15 +35,20 @@
  font-size: 1.5vw;
 }
 
-.portfolio-tr:nth-child(odd) {
+.nice-table-tr:nth-child(odd) {
   background-color: #ededed;
 }
 
-.portfolio-table-header {
+.nice-table-header {
   background-color: #dadada;
 }
 
 #portfolio {
+  border: 1px;
+  padding: 0.5vw;
+}
+
+#other-projects {
   border: 1px;
   padding: 0.5vw;
 }
@@ -57,15 +62,24 @@
   padding: 0vw 0vw 0vw 1.2vw;
   width: 90%;
   font-size: 1vw;
-  border: 1px solid #ddd
+  border: 1px solid #ddd;
   margin-bottom: 1vw;
   display: block;
   margin: 0 auto;
 }
 
-p {
+.padded{
  padding: 0 7vw;
  font-size: 1.2vw;
+}
+
+h1 {
+  font-size: 4vw;
+}
+
+
+
+p {
 }
 </style>
 
@@ -75,7 +89,7 @@ p {
 
 <body>
 
-<h1 style="font-size:4vw;text-align:center">Alexandre De Zotti</h1>
+<h1 style="text-align:center">Alexandre De Zotti</h1>
 
 
 
@@ -91,21 +105,23 @@ p {
 </div>
 
 <div id="portfolio">
-<table class="portfolio-table center" id="portfolio-table">
-<tr class="portfolio-table-header">
+<table class="portfolio-table center padded-nice-table portfolio-table" id="portfolio-table">
+<tr class="nice-table-header">
 {% for col in portfolio_columns %}
 {% if col != 'Tags' %}
 <th>
 {{col}}
 </th>
+{% else %}
+<th style="display:none"></th>
 {% endif %}
 {% endfor %}
 </tr>
 {% for item in portfolio %}
-<tr class="portfolio-tr {{item['tag_classes']}}">
+<tr class="nice-table-tr {{item['tag_classes']}}">
 {% for k, v in item.items() %}
 {% if(k not in [ 'tags', 'tag_classes' ]) %}
-<td class="portfolio-td">
+<td class="nice-table-td">
 {% if(k == 'name') %}
 {% if(item['project_page'] != '') %}
 <a href="{{item['project_page']}}"><i>{{v}}</i></a>
@@ -185,6 +201,33 @@ function filter_portfolio() {
   }
 }
 </script>
+
+<h2 class="padded">Other projects</h2>
+
+<div id="other-projects">
+<table class="center padded-nice-table">
+<tr class="nice-table-header"><th>Name</th><th>Description</th><th>Link</th><th>Completion</th></tr>
+{% for project in other_projects %}
+<tr class="nice-table-tr">
+{% for k, v in project.items() %}
+<td class="nice-table-td">
+{% if(k == 'name') %}
+{% if(project['link'] != '') %}
+<a href="{{project['link']}}"><i>{{v}}</i></a>
+{% else %}
+<i>{{v}}</i>
+{% endif %}
+{% elif(k == 'link') %}
+<a href="{{v}}">link</a>
+{% else %}
+<i>{{v}}</i>
+{% endif %}
+</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</div>
 
 </body>
 </html>
