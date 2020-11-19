@@ -1,29 +1,74 @@
 <!doctype html>
-<html>
-<style>
-</style>
+<html lang="en">
+<head>
 
-
-<script  type="text/javascript">
+<script>
 function setup_page(){ return; }
 </script>
 
 
-<head>
+<style>
+
+*{
+  font-family: arial, sans-serif;
+}
+
+.contact-details-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.portfolio-table {
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portfolio-td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#contact-details {
+ font-size: 1.5vw;
+}
+
+.portfolio-tr:nth-child(odd) {
+  background-color: #ededed;
+}
+
+.portfolio-table-header {
+  background-color: #dadada;
+}
+
+#portfolio {
+  border: 1px;
+  padding: 8px;
+}
+
+</style>
+
 <title>Alexandre DeZotti Portfolio</title>
+
 </head>
+
 <body onload="setup_page()">
 
-<h1>Alexandre De Zotti</h1>
+<h1 style="font-size:4vw;text-align:center">Alexandre De Zotti</h1>
 
 {% include 'includes/contact-details.html' %}
 
 <div class="vert-space">
+<p></p>
 </div>
 
+
 <div id="portfolio">
-<table style="width:90%" class="portfolio-table">
-<tr class="table-header">
+<table class="portfolio-table">
+<tr class="portfolio-table-header">
 {% for col in portfolio_columns %}
 {% if col != 'Tags' %}
 <th>
@@ -33,11 +78,21 @@ function setup_page(){ return; }
 {% endfor %}
 </tr>
 {% for item in portfolio %}
-<tr class="{{item['tag_classes']}}">
+<tr class="portfolio-tr {{item['tag_classes']}}">
 {% for k, v in item.items() %}
 {% if(k not in [ 'tags', 'tag_classes' ]) %}
-<td>
+<td class="portfolio-td">
+{% if(k == 'project_link') %}
+{% if(v != '') %}
+<a href={{v}}>code</a>
+{% endif %}
+{% elif(k == 'project_page') %}
+{% if(v != '') %}
+<a href={{v}}>page</a>
+{% endif %}
+{% else %}
 {{v}}
+{% endif %}
 </td>
 {% endif %}
 {% endfor %}

@@ -17,7 +17,7 @@ columns = [
 ]
 
 def convert_tags_to_classes(tags, class_head = 'tag-class-'):
-  return ','.join([ class_head+tag for tag in tags.split(', ') ])
+  return ' '.join([ class_head + (tag.replace(' ', '-')) for tag in tags.split(', ') ])
 
 
 def create_tag_list(portfolio):
