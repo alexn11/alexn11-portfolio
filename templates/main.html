@@ -20,6 +20,10 @@
   margin-right: auto;
 }
 
+#contact-details {
+ font-size: 1.5vw;
+}
+
 .padded-nice-table {
   border-collapse: collapse;
   width: 90%;
@@ -31,17 +35,28 @@
   padding: 0.3vw;
 }
 
-#contact-details {
- font-size: 1.5vw;
+.nice-table-header {
+  background-color: #dadada;
 }
-
 .nice-table-tr:nth-child(odd) {
   background-color: #ededed;
 }
 
-.nice-table-header {
-  background-color: #dadada;
+.nice-table-blue-header {
+  background-color: #89bae3;
 }
+.nice-table-blue-tr:nth-child(odd) {
+  background-color: #abcae3;
+}
+
+.nice-table-orange-header {
+  background-color: #e9882a;
+}
+.nice-table-orange-tr:nth-child(odd) {
+  background-color: #f5bd8f;
+}
+
+
 
 #portfolio {
   border: 1px;
@@ -107,7 +122,7 @@ h1 {
 
 <div id="portfolio">
 <table class="portfolio-table center padded-nice-table portfolio-table" id="portfolio-table">
-<tr class="nice-table-header">
+<tr class="nice-table-blue-header">
 {% for col in portfolio_columns %}
 {% if col != 'Tags' %}
 <th>
@@ -119,7 +134,7 @@ h1 {
 {% endfor %}
 </tr>
 {% for item in portfolio %}
-<tr class="nice-table-tr {{item['tag_classes']}}">
+<tr class="nice-table-blue-tr {{item['tag_classes']}}">
 {% for k, v in item.items() %}
 {% if(k not in [ 'tags', 'tag_classes' ]) %}
 <td class="nice-table-td">
@@ -207,9 +222,9 @@ function filter_portfolio() {
 
 <div id="other-projects">
 <table class="center padded-nice-table">
-<tr class="nice-table-header"><th>Name</th><th>Description</th><th>Link</th><th>Completion</th></tr>
+<tr class="nice-table-orange-header"><th>Name</th><th>Description</th><th>Link</th><th>Completion</th></tr>
 {% for project in other_projects %}
-<tr class="nice-table-tr">
+<tr class="nice-table-orange-tr">
 {% for k, v in project.items() %}
 <td class="nice-table-td">
 {% if(k == 'name') %}
