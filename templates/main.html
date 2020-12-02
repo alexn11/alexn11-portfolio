@@ -83,18 +83,27 @@
   margin: 0 auto;
 }
 
+#contact-details {
+  font-size: 1.2vw;
+}
+.normal-text {
+  font-size: 1.2vw;
+}
+
 .padded{
  padding: 0 7vw;
  font-size: 1.2vw;
 }
 
-h1 {
-  font-size: 4vw;
+.title-text {
+  font-size: 3vw;
+  text-align:center;
+  margin: 0.9vw;
 }
 
-.h1-sub {
-  font-size: 3vw;
-  /*padding: 0vw 0;*/
+
+.bigger-title-text {
+  font-size: 4vw;
 }
 
 </style>
@@ -105,9 +114,14 @@ h1 {
 
 <body>
 
-<h1 style="text-align:center">Alexandre De Zotti</h1>
-<p  class="h1-sub" style="text-align:center">Data Scientist</p>
+<p class="title-text bigger-title-text"><b>Alexandre De Zotti</b></p>
+<p class="title-text">Data Scientist</p>
 
+
+
+<div class="vert-space">
+<p style="padding: 0.vw;">&nbsp;</p>
+</div>
 
 
 {% include 'includes/contact-details.html' %}
@@ -117,11 +131,13 @@ h1 {
 </div>
 
 
-<div style="width:80%;padding:0.1vw 7vw;font-size:1.8vw">
+
+<div class="padded">
 <p>I am a data scientist with a PhD in Mathematics who focuses on solving problems using natural language processing.
-I use mainly Python and related data science &amp; machine learning libraries.</p>
+I use mainly Python and data science &amp; machine learning libraries.</p>
 
 <p>This data science project portfolio is composed of {{portfolio|length}} projects covering a wide spectrum of the data science processes.</p>
+
 </div>
 
 
